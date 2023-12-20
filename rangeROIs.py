@@ -36,7 +36,6 @@ def show_mask(mask, ax, random_color=False):
 def maximum_internal_rectangle(mask, scale_percent):
     resized = mask.copy()
 
-    # 求最小内接矩形
     img_gray = cv2.cvtColor(resized, cv2.COLOR_BGR2GRAY)
     ret, img_bin = cv2.threshold(img_gray, 0, 255, cv2.THRESH_BINARY)
     kernel = np.ones((13, 13), np.uint8)
@@ -87,9 +86,7 @@ def maximum_internal_rectangle(mask, scale_percent):
                 index_rect += 1
 
             if best_rect_found:
-                # 如果要在灰度图img_gray上画矩形，请用黑色画（0,0,0）
                 cv2.rectangle(resized, (x1, y1), (x2, y2), (255, 0, 0), 3)
-                # 在mask上画最小内接矩形
                 # cv2.imshow("rec", img)
                 # cv2.waitKey(0)
 
@@ -109,7 +106,6 @@ def maximum_internal_rectangle(mask, scale_percent):
 def maximum_internal_rectangle_2(mask, path):
     resized = mask.copy()
 
-    # 求最小内接矩形
     img_gray = cv2.cvtColor(resized, cv2.COLOR_BGR2GRAY)
     ret, img_bin = cv2.threshold(img_gray, 0, 255, cv2.THRESH_BINARY)
     kernel = np.ones((13, 13), np.uint8)
@@ -136,7 +132,6 @@ def maximum_internal_rectangle_2(mask, path):
 
 
 def random_crop_inner_rectangle(img, x1, y1, x2, y2, crop_width, crop_height):
-    # 确保x1 < x2 和 y1 < y2
     x1, x2 = min(x1, x2), max(x1, x2)
     y1, y2 = min(y1, y2), max(y1, y2)
 
@@ -157,7 +152,7 @@ def random_crop_inner_rectangle(img, x1, y1, x2, y2, crop_width, crop_height):
 
 
 click_x, click_y = -1, -1
-clicked_points = []  # 用于存储鼠标点击的坐标值
+clicked_points = [] 
 def mouse_callback(event, x, y, flags, param):
     global click_x, click_y
     if event == cv2.EVENT_LBUTTONDOWN:
@@ -225,7 +220,6 @@ def dispose(image):
     src, x1, y1, x2, y2 = maximum_internal_rectangle_2(mask, scale_percent)
     new_folder_path = save_path
     os.makedirs(new_folder_path, exist_ok=True)
-    # # 在原图和mask上画最小内接矩形
     image_rect = image.copy()
     cv2.rectangle(image_rect, (x1, y1), (x2, y2), (255, 0, 0), 10)
 
@@ -258,7 +252,6 @@ def main(predictor, root, save_path, image_name, img_len, roi_len):
         image = cv2.imread(image_path)
         mouse_click(image)
         dispose(image)
-        print("已处理： " + image_path)
 
     for image_name in image_names:
         print(image_name)
@@ -266,7 +259,6 @@ def main(predictor, root, save_path, image_name, img_len, roi_len):
         image = cv2.imread(image_path)
         mouse_click(image)
         dispose(image)
-        print("已处理： " + image_path)
 
     f.close()
     excel_path = 'marked/point_results_2.xlsx'
