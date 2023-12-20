@@ -30,11 +30,10 @@ def show_mask(mask, ax, random_color=False):
 def leaf_eval(gt_mask, pred_mask):
     assert gt_mask.shape == pred_mask.shape
 
-    # 计算交集和并集
     intersection = np.logical_and(gt_mask, pred_mask).sum()
     union = np.logical_or(gt_mask, pred_mask).sum()
 
-    true_mask = (gt_mask > 0).astype(np.uint8)  # 转换为二值化，0变为0，255变为1
+    true_mask = (gt_mask > 0).astype(np.uint8) 
     predicted_mask = (pred_mask > 0).astype(np.uint8)
 
     tp = np.sum(np.logical_and(predicted_mask == 1, true_mask == 1))
@@ -45,17 +44,13 @@ def leaf_eval(gt_mask, pred_mask):
     precision = tp / (tp + fp)
     recall = tp / (tp + fn)
 
-    # 计算像素精确度（Pixel Accuracy）
     pa = (tp + tn) / (tp + tn + fp + fn)
-    # 计算交并比（Intersection over Union，IoU）
     iou = tp / (tp + fp + fn)
     # print(iou)
     # iou = intersection / union
-    # 计算F1系数
     # f1 = 2 * tp / (2 * tp + fp + fn + fp + fn)
     # print(f1)
     f1 = 2 * precision * recall / (precision + recall)
-    ## 计算Dice系数
     # dice = 2 * tp / (2 * tp + fp + fn)
     # print(dice)
     dice = (2 * iou) / (1 + iou)
@@ -98,7 +93,7 @@ if __name__ == '__main__':
         _, _, gt_mask = cv2.split(gt_image)
         ret, gt_mask = cv2.threshold(gt_mask, 0, 255, cv2.THRESH_BINARY)
 
-        gt_mask = (gt_mask > 0).astype(np.uint8)  # 转换为二值化，0变为0，255变为1
+        gt_mask = (gt_mask > 0).astype(np.uint8)
 
         input_point = np.array([[1800, 1700]])
         print(image_name, input_point)
