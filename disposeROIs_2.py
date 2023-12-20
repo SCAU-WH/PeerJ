@@ -78,9 +78,7 @@ def fill(binary_img, thresh):
 
 
 def closing(binary_img, kernel_size=11):
-    # 定义一个闭运算的结构元素
     kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (kernel_size, kernel_size))
-    # 使用闭运算填充缺失的轮廓中心
     closing_img = cv2.morphologyEx(binary_img, cv2.MORPH_CLOSE, kernel)
 
     return closing_img
