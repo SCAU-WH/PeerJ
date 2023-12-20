@@ -5,7 +5,6 @@ from scipy.interpolate import make_interp_spline
 from matplotlib.ticker import MaxNLocator
 from scipy.stats import pearsonr
 
-# 读取 Excel 表格数据
 file_path = 'Fig. 6.xlsx'
 sheet_name = 'Sheet1'
 
@@ -14,10 +13,9 @@ data = pd.read_excel(file_path, sheet_name=sheet_name)
 values1 = data['droplet_area_rate']
 values2 = data['PS_area_rate']
 
-# 创建一个折线图
 plt.figure(1, figsize=(10, 6))
 plt.subplot(1, 2, 1)
-# 生成递增的横坐标值从1开始
+
 x_values = np.arange(0, len(values1))
 x_new = np.linspace(x_values.min(), x_values.max(), 300)
 spline1 = make_interp_spline(x_values, values1, k=3)
@@ -33,8 +31,6 @@ plt.legend()
 plt.gca().xaxis.set_major_locator(MaxNLocator(integer=True))
 plt.gca().yaxis.set_major_locator(MaxNLocator(integer=True))
 
-
-# 创建一个折线图
 plt.figure(1, figsize=(10, 6))
 plt.subplot(1, 2, 2)
 coefficients = np.polyfit(values1, values2, 1)
