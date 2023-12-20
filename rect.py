@@ -37,7 +37,6 @@ def show_mask(mask, ax, random_color=False):
 def maximum_internal_rectangle(mask, scale_percent, path):
     resized = mask.copy()
 
-    # 求最小内接矩形
     img_gray = cv2.cvtColor(resized, cv2.COLOR_BGR2GRAY)
     ret, img_bin = cv2.threshold(img_gray, 0, 255, cv2.THRESH_BINARY)
     kernel = np.ones((13, 13), np.uint8)
@@ -89,9 +88,7 @@ def maximum_internal_rectangle(mask, scale_percent, path):
                 index_rect += 1
 
             if best_rect_found:
-                # 如果要在灰度图img_gray上画矩形，请用黑色画（0,0,0）
                 cv2.rectangle(resized, (x1, y1), (x2, y2), (255, 0, 0), 3)
-                # 在mask上画最小内接矩形
                 # cv2.imshow("rec", resized)
                 # cv2.imwrite(path, resized)
                 # cv2.waitKey(0)
@@ -114,7 +111,6 @@ def maximum_internal_rectangle_2(mask, path):
     # scale_percent = 9
 
     resized = mask.copy()
-    # 求最小内接矩形
     img_gray = cv2.cvtColor(resized, cv2.COLOR_BGR2GRAY)
     ret, img_bin = cv2.threshold(img_gray, 0, 255, cv2.THRESH_BINARY)
     kernel = np.ones((13, 13), np.uint8)
@@ -158,7 +154,6 @@ def main(predictor, root, save_path, image_name, img_len, roi_len):
             print("!!!!!!!!!!!!!!!!!", image_path)
             pass
         else:
-            print("图像读取失败", image_path)
             continue
 
         input_point = np.array([[1600, 1800]])
@@ -192,27 +187,23 @@ def main(predictor, root, save_path, image_name, img_len, roi_len):
 
         results.append([image_name+str(i),  area_1,  area_2, time, time_2])
 
-        # print("已处理： " + image_path)
     total_area_1 = 0
     total_area_2 = 0
     total_time = 0
     total_time_2 = 0
     num_sublists = len(results)
 
-    # 遍历 results 列表，累加各个值
     for sublist in results:
         total_area_1 += sublist[1]
         total_area_2 += sublist[2]
         total_time += sublist[3]
         total_time_2 += sublist[4]
 
-    # 计算平均值
     avg_area_1 = total_area_1 / num_sublists
     avg_area_2 = total_area_2 / num_sublists
     avg_time = total_time / num_sublists
     avg_time_2 = total_time_2 / num_sublists
 
-    # 打印平均值
     print("Average area 1:", avg_area_1)
     print("Average area 2:", avg_area_2)
     print("Average time:", avg_time)
