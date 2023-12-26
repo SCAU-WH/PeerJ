@@ -61,8 +61,8 @@ def leaf_eval(gt_mask, pred_mask):
 
 
 if __name__ == '__main__':
-    directory_path = "marked\\JPEGImages\\1"
-    excel_path = 'excel_2/evaluation_results_IOC.xlsx'
+    directory_path = ""
+    excel_path = ''
 
     mobile_sam_type = "vit_t"
     mobile_sam_checkpoint = "mobile_sam.pt"
@@ -72,7 +72,7 @@ if __name__ == '__main__':
     sam_checkpoint = "sam_vit_b_01ec64.pth"
 
     f = open("marked\\3.txt")
-    file_path = 'marked/point_results3.xlsx'
+    file_path = ''
     sheet_name = 'Sheet1'
     data = pd.read_excel(file_path, sheet_name=sheet_name)
 
@@ -83,10 +83,9 @@ if __name__ == '__main__':
 
     results = []
     for filename in os.listdir(directory_path):
-        image_name = os.path.splitext(filename)[0]
 
-        image_path = directory_path + "\\" + image_name + ".jpg"
-        gt_image_path = "marked\\SegmentationClassPNG\\" + image_name + ".png"
+        image_path = ""
+        gt_image_path = ""
         image = cv2.imread(image_path)
         gt_image = cv2.imread(gt_image_path)
 
