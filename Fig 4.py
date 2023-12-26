@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from scipy.interpolate import make_interp_spline
 from scipy.stats import pearsonr
 
-file_path = 'Fig. 4.xlsx'
+file_path = ' '
 sheet_name = 'Sheet1'
 
 data = pd.read_excel(file_path, sheet_name=sheet_name)
