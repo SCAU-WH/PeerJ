@@ -233,7 +233,7 @@ image_names = []
 resluts = []
 def main(predictor, root, save_path, image_name, img_len, roi_len):
 
-    file_path = 'marked/2.xlsx'
+    file_path = ''
     sheet_name = 'Sheet1'
     data = pd.read_excel(file_path, sheet_name=sheet_name)
 
@@ -243,25 +243,23 @@ def main(predictor, root, save_path, image_name, img_len, roi_len):
     image_names = data['Image Name']
     image_names2 = data2['Image Name']
     # print(len(image_names))
-    f = open("marked\\3.txt")
+    f = open(" ")
 
     for image_name in image_names2:
-        image_name = '1688125653033'
-        print(image_name)
-        image_path = "marked\\JPEGImages\\2\\" + str(image_name) + ".jpg"
+        image_path = ""
         image = cv2.imread(image_path)
         mouse_click(image)
         dispose(image)
 
     for image_name in image_names:
         print(image_name)
-        image_path = "marked\\JPEGImages\\1\\" + str(image_name) + ".jpg"
+        image_path = ""
         image = cv2.imread(image_path)
         mouse_click(image)
         dispose(image)
 
     f.close()
-    excel_path = 'marked/point_results_2.xlsx'
+    excel_path = ''
     df = pd.DataFrame(resluts, columns=['Image Name', 'click_x', 'click_y'])
 
     df.to_excel(excel_path, index=False)
