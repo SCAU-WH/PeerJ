@@ -5,7 +5,7 @@ from scipy.interpolate import make_interp_spline
 from matplotlib.ticker import MaxNLocator
 from scipy.stats import pearsonr
 
-file_path = 'Fig. 6.xlsx'
+file_path = ' '
 sheet_name = 'Sheet1'
 
 data = pd.read_excel(file_path, sheet_name=sheet_name)
