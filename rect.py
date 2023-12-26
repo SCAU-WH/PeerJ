@@ -216,11 +216,8 @@ if __name__ == "__main__":
     sam_checkpoint = "mobile_sam.pt"
     device = "cuda"
 
-    root = "paper_rect_image/"
-    save_path = "outputs_rect_2/"
-    image_names = ["img_", "img_single_"]
-    img_len = 73
-    roi_len = 5
+    root = ""
+    save_path = ""
 
     mobile_sam = sam_model_registry[model_type](checkpoint=sam_checkpoint)
     mobile_sam.to(device=device)
@@ -233,7 +230,7 @@ if __name__ == "__main__":
 
     df = pd.DataFrame(results, columns=['image_name',  'area_1',  'area_2', 'time', 'time_2'])
 
-    excel_path = 'excel_2/area_resize_results.xlsx'
+    excel_path = ''
     df.to_excel(excel_path, index=False)
     print("Results saved to:", excel_path)
 
